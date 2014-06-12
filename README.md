@@ -6,4 +6,7 @@ dylib injector for mach-o binaries
 
 Usage
 ============
-`yololib` `[binary]` `[dylib file]`
+
+Self-explainatory
+
+`yololib` `binary` `dylib file`
