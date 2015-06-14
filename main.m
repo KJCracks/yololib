@@ -188,11 +188,17 @@ void inject_file(NSString* file, NSString* _dylib)
             inject_dylib_64(binaryFile, 0);
             break;
         }
-        default:
+        case MH_CIGAM:
+        case MH_MAGIC:
         {
             NSLog(@"Thin 32bit binary!\n");
             inject_dylib_64(binaryFile, 0);
             break;
+        }
+        default:
+        {
+            printf("Error: Unknown architecture detected");
+            exit(1);
         }
     }
     
