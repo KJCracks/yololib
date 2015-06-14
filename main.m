@@ -25,16 +25,12 @@
 #include <mach-o/loader.h>
 #import <Foundation/Foundation.h>
 
-#define CPU_TYPE_ARM64 16777228
 
 NSString* DYLIB_PATH;
 
-//#define DYLIB_PATH "@executable_path/crack.dylib"
 #define DYLIB_CURRENT_VER 0x10000
 #define DYLIB_COMPATIBILITY_VERSION 0x10000
 
-
-#define swap32(value) (((value & 0xFF000000) >> 24) | ((value & 0x00FF0000) >> 8) | ((value & 0x0000FF00) << 8) | ((value & 0x000000FF) << 24) )
 #define ARMV7 9
 #define ARMV6 6
 
@@ -108,7 +104,7 @@ void inject_dylib_64(FILE* newFile, uint32_t top) {
          dylib_size2 += sizeof(long) - (dylib_size % sizeof(long)); // load commands like to be aligned by long
          
          NSLog(@"dylib size2 wow %u", dylib_size2);
-         NSLog(@"dylib size2 wow %u", swap32(dylib_size2));*/
+         NSLog(@"dylib size2 wow %u", CFSwapInt32(dylib_size2));*/
         
         NSLog(@"mach.ncmds %u", mach.ncmds);
         
@@ -168,14 +164,14 @@ void inject_file(NSString* file, NSString* _dylib)
             struct fat_arch* arch = (struct fat_arch*) &fh[1];
             NSLog(@"FAT binary!\n");
             int i;
-            for (i = 0; i < swap32(fh->nfat_arch); i++) {
-                NSLog(@"Injecting to arch %i\n", swap32(arch->cpusubtype));
+            for (i = 0; i < CFSwapInt32(fh->nfat_arch); i++) {
+                NSLog(@"Injecting to arch %i\n", CFSwapInt32(arch->cpusubtype));
                 if (CFSwapInt32(arch->cputype) == CPU_TYPE_ARM64) {
                     NSLog(@"64bit arch wow");
-                    inject_dylib_64(binaryFile, swap32(arch->offset));
+                    inject_dylib_64(binaryFile, CFSwapInt32(arch->offset));
                 }
                 else {
-                    inject_dylib(binaryFile, swap32(arch->offset));
+                    inject_dylib(binaryFile, CFSwapInt32(arch->offset));
                 }
                 arch++;
             }
@@ -208,14 +204,12 @@ void inject_file(NSString* file, NSString* _dylib)
 
 int main(int argc, const char * argv[])
 {
-    char buffer[4096], binary[4096], dylib[4096];
-    
-    strlcpy(binary, argv[1], sizeof(binary));
-    strlcpy(dylib, argv[2], sizeof(dylib));
-    DYLIB_PATH = [NSString stringWithFormat:@"@executable_path/%@", [NSString stringWithUTF8String:dylib]];
+    NSString* binary = [NSString stringWithUTF8String:argv[1]];
+    NSString* dylib = [NSString stringWithUTF8String:argv[2]];
+    DYLIB_PATH = [NSString stringWithFormat:@"@executable_path/%@", dylib];
     NSLog(@"dylib path %@", DYLIB_PATH);
     
-    inject_file([NSString stringWithUTF8String:binary], DYLIB_PATH);
+    inject_file(binary, DYLIB_PATH);
     
     return 0;
 }
