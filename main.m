@@ -188,7 +188,7 @@ void inject_file(NSString* file, NSString* _dylib)
         case MH_MAGIC:
         {
             NSLog(@"Thin 32bit binary!\n");
-            inject_dylib_64(binaryFile, 0);
+            inject_dylib(binaryFile, 0);
             break;
         }
         default:
@@ -204,6 +204,12 @@ void inject_file(NSString* file, NSString* _dylib)
 
 int main(int argc, const char * argv[])
 {
+    // must have at least two arguments to run this program (first argument is the command which ran the program(
+    if (argc < 3) {
+        NSLog(@"usage: %s <binary> <dylib file>", argv[0]);
+        return 1;
+    }
+              
     NSString* binary = [NSString stringWithUTF8String:argv[1]];
     NSString* dylib = [NSString stringWithUTF8String:argv[2]];
     DYLIB_PATH = [NSString stringWithFormat:@"@executable_path/%@", dylib];
