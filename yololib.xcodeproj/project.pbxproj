@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AD4A0D571949A42E00B6B127 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD4A0D561949A42E00B6B127 /* Foundation.framework */; };
 		AD4A0D591949AA5B00B6B127 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4A0D581949AA5B00B6B127 /* main.m */; };
+		DD402B6C1C7C7CC8008033C9 /* Yolo.m in Sources */ = {isa = PBXBuildFile; fileRef = DD402B6B1C7C7CC8008033C9 /* Yolo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,6 +28,8 @@
 		AD49F4E51769B63A00B8D2E0 /* yololib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = yololib; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD4A0D561949A42E00B6B127 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AD4A0D581949AA5B00B6B127 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DD402B6A1C7C7CC8008033C9 /* Yolo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yolo.h; sourceTree = "<group>"; };
+		DD402B6B1C7C7CC8008033C9 /* Yolo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Yolo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +47,8 @@
 		AD49F4DC1769B63800B8D2E0 = {
 			isa = PBXGroup;
 			children = (
+				DD402B6A1C7C7CC8008033C9 /* Yolo.h */,
+				DD402B6B1C7C7CC8008033C9 /* Yolo.m */,
 				AD4A0D581949AA5B00B6B127 /* main.m */,
 				AD4A0D561949A42E00B6B127 /* Foundation.framework */,
 				AD49F4E61769B63A00B8D2E0 /* Products */,
@@ -109,6 +114,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD402B6C1C7C7CC8008033C9 /* Yolo.m in Sources */,
 				AD4A0D591949AA5B00B6B127 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
