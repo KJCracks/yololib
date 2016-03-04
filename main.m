@@ -188,7 +188,7 @@ void inject_file(NSString* file, NSString* _dylib)
         case MH_MAGIC:
         {
             NSLog(@"Thin 32bit binary!\n");
-            inject_dylib_64(binaryFile, 0);
+            inject_dylib(binaryFile, 0);
             break;
         }
         default:
