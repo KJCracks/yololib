@@ -204,6 +204,11 @@ void inject_file(NSString* file, NSString* _dylib)
 
 int main(int argc, const char * argv[])
 {
+    if (argc != 3) {
+        NSLog(@"Usage: %s binary_file dylib_file", argv[0]);
+        return 1;
+    }
+    
     NSString* binary = [NSString stringWithUTF8String:argv[1]];
     NSString* dylib = [NSString stringWithUTF8String:argv[2]];
     DYLIB_PATH = [NSString stringWithFormat:@"@executable_path/%@", dylib];
